@@ -25,4 +25,4 @@ module "eks" {
       desired_size = 2
     }
   }
-  
+}
