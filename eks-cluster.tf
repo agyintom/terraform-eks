@@ -25,44 +25,4 @@ module "eks" {
       desired_size = 2
     }
   }
-
-  # ---- Access Entries ----
-  authentication_mode = "API_AND_CONFIG_MAP"
-
-  access_entries = {
-    github_actions = {
-      principal_arn = var.github_actions_iam_user_arn
-      type          = "STANDARD"
-      username      = "github-actions"
-
-      policy_associations = {
-        edit = {
-          policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSEditPolicy"
-          access_scope = {
-            type       = "namespace"
-            namespaces = ["default"]
-          }
-        }
-      }
-    }
-
-    admin = {
-      principal_arn = var.admin_iam_user_arn
-      type          = "STANDARD"
-
-      policy_associations = {
-        admin = {
-          policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
-          access_scope = {
-            type = "cluster"
-          }
-        }
-      }
-    }
-
-    node_group = {
-      principal_arn = var.node_group_role_arn
-      type          = "EC2_LINUX"
-    }
-  }
-}
+  
